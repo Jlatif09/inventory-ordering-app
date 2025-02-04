@@ -22,12 +22,19 @@ df = load_data()
 # Streamlit UI
 st.title("Inventory Ordering System")
 
+# Display the full list of items
+st.write("### Full Inventory List")
+st.dataframe(df)
+
 # Select vendor
-vendors = df['Vendor'].unique()
+vendors = ['All Vendors'] + list(df['Vendor'].unique())
 selected_vendor = st.selectbox("Select Vendor", vendors)
 
 # Filter data by selected vendor
-filtered_df = df[df['Vendor'] == selected_vendor]
+if selected_vendor == "All Vendors":
+    filtered_df = df
+else:
+    filtered_df = df[df['Vendor'] == selected_vendor]
 
 # Display and allow edits
 edited_df = st.data_editor(filtered_df, num_rows="dynamic")
