@@ -32,6 +32,16 @@ filtered_df = df[df['Vendor'] == selected_vendor]
 # Display and allow edits
 edited_df = st.data_editor(filtered_df, num_rows="dynamic")
 
+# Button to generate summary
+def generate_summary(df):
+    summary_df = df[df['Amount to Order'] != ""].groupby(['Vendor', 'Vendor Item Name'])['Amount to Order'].sum().reset_index()
+    return summary_df
+
+if st.button("Generate Summary"):
+    summary_df = generate_summary(edited_df)
+    st.write("### Order Summary")
+    st.dataframe(summary_df)
+
 # Export updated file
 def convert_df(df):
     return df.to_csv(index=False).encode('utf-8')
