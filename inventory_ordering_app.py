@@ -6,7 +6,7 @@ import requests
 # Load inventory data from GitHub
 @st.cache_data
 def load_data():
-    url = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/inventory-ordering-app/main/COMPLETE%20VENDOR%20ITEMS%20FOR%20IVENTORY.xlsx"
+    url = "https://raw.githubusercontent.com/Jlatif09/inventory-ordering-app/main/COMPLETE%20VENDOR%20ITEMS%20FOR%20IVENTORY.xlsx"
     response = requests.get(url)
     if response.status_code == 200:
         file = io.BytesIO(response.content)
